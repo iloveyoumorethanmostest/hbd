@@ -172,7 +172,7 @@
   }
 
   .book-container {
-    width: min(460px, 92vw);
+    width: min(720px, 96vw);
     aspect-ratio: 3 / 4;
     position: relative;
   }
@@ -221,6 +221,13 @@
   .page-content.white { background: white; }
   .page-content.warm  { background: var(--warm); }
   .page-content.sage  { background: #eef3e8; }
+  .journal-photo-page {
+    padding: 0;
+    justify-content: center;
+    background: #fff;
+    overflow: hidden;
+  }
+  .journal-photo-page::before { display: none; }
 
   .page-content::before {
     content: '';
@@ -268,19 +275,19 @@
   }
 
   .journal-image {
-    width: auto;
-    max-width: min(100%, 310px);
-    height: auto;
-    max-height: 235px;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
     object-fit: contain;
     display: block;
-    border: 5px solid white;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(58,32,48,0.14);
-    margin: 2px auto 12px;
+    border: 0;
+    border-radius: 12px;
+    box-shadow: none;
+    margin: 0;
     position: relative;
     z-index: 1;
-    background: rgba(255,255,255,0.74);
+    background: transparent;
   }
 
   .journal-signature {
@@ -752,7 +759,7 @@
   .guide li { margin: 6px 0; }
 
 
-  /* ── CLOSING LOVE NOTE ── */
+  /* ── LOVE LETTER CLOSING ── */
   .closing {
     background: linear-gradient(160deg, #fde8ec 0%, #fdf6f0 100%);
     padding: 100px 24px;
@@ -763,58 +770,46 @@
   .closing::before {
     content: '♡';
     position: absolute;
-    font-size: clamp(180px, 35vw, 420px);
-    color: rgba(212,96,122,0.055);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    font-size: 400px;
+    color: rgba(212,96,122,0.05);
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
     pointer-events: none;
   }
   .closing-quote {
-    width: min(100%, 720px);
-    margin: 0 auto;
-    padding: clamp(28px, 6vw, 48px) clamp(22px, 6vw, 54px);
-    position: relative;
-    z-index: 1;
-    text-align: center;
     font-family: 'Playfair Display', serif;
-    font-size: clamp(34px, 8vw, 76px);
-    line-height: 1.08;
+    font-size: clamp(28px, 6vw, 60px);
+    font-style: italic;
     color: var(--text);
-    background: rgba(255,255,255,0.58);
-    border: 1px solid rgba(212,96,122,0.16);
-    border-radius: 34px;
-    box-shadow: 0 24px 70px rgba(58,32,48,0.12);
-    backdrop-filter: blur(10px);
-  }
-  .closing-quote em {
-    font-family: 'Dancing Script', cursive;
-    font-style: normal;
-    color: var(--rose);
-    font-size: 1.12em;
-  }
-  .closing-sig {
-    display: inline-block;
-    margin: 28px auto 0;
-    padding: 10px 24px;
+    line-height: 1.3;
+    max-width: 800px;
+    margin: 0 auto;
     position: relative;
     z-index: 1;
-    text-align: center;
+  }
+  .closing-quote em { color: var(--dusty); }
+  .closing-sig {
     font-family: 'Dancing Script', cursive;
-    font-size: clamp(24px, 5vw, 38px);
-    color: var(--dusty);
-    background: rgba(255,255,255,0.55);
-    border-radius: 999px;
+    font-size: clamp(20px, 4vw, 34px);
+    color: var(--rose);
+    margin-top: 32px;
+    position: relative;
+    z-index: 1;
   }
   .closing-hearts {
-    margin-top: 22px;
     display: flex;
     justify-content: center;
-    gap: 14px;
+    gap: 12px;
+    margin-top: 24px;
+    font-size: 28px;
     position: relative;
     z-index: 1;
-    font-size: clamp(26px, 6vw, 40px);
   }
+  .closing-hearts span { animation: pulse 2s ease-in-out infinite; }
+  .closing-hearts span:nth-child(2) { animation-delay: 0.4s; }
+  .closing-hearts span:nth-child(3) { animation-delay: 0.8s; }
+
+
   /* ── NAV ── */
   .nav {
     position: fixed;
@@ -866,28 +861,29 @@
     .scroll-hint { bottom: 18px; }
     .section, .video-section, .playlist-section, .gift-section, .hbd-section, .closing { padding: 64px 16px; }
     .section-title { margin-bottom: 36px; }
-    .book-container { width: min(390px, 88vw); }
+    .book-container { width: 96vw; }
     .page-content { padding: 22px 18px; }
     .page-deco { font-size: 30px; margin-bottom: 8px; }
     .page-heading { font-size: clamp(19px, 6vw, 25px); }
     .page-body { font-size: clamp(12px, 3.5vw, 14px); line-height: 1.55; }
-    .journal-image { max-width: 100%; max-height: 205px; margin-bottom: 9px; }
-    .journal-signature { padding: 12px 14px; font-size: 22px; }
-    .mag-controls { gap: 14px; }
-    .mag-btn { width: 44px; height: 44px; }
-    .gallery-grid { columns: 1; padding: 0 16px; }
-    .video-grid { grid-template-columns: 1fr; padding: 0 16px; }
-    .hbd-balloons { font-size: 34px; opacity: 0.55; }
-    .hbd-sparkles { gap: 10px; font-size: 28px; }
-    .playlist-card { padding: 10px; border-radius: 20px; }
-    .playlist-card iframe { height: 352px; border-radius: 14px; }
-    .letter-card { margin-top: 26px; padding: 56px 20px 34px; border-radius: 22px; outline-width: 6px; }
-    .letter-card p { font-size: 14px; line-height: 1.72; }
-    .letter-close { top: 12px; right: 12px; width: 36px; height: 36px; font-size: 23px; }
+    .journal-image {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
+    display: block;
+    border: 0;
+    border-radius: 12px;
+    box-shadow: none;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    background: transparent;
   }
 
   @media (max-width: 380px) {
-    .book-container { width: 90vw; }
+    .book-container { width: 96vw; }
     .page-content { padding: 18px 14px; }
     .cover-date { margin-top: 12px; }
     .mag-page-indicator { font-size: 16px; }
@@ -965,7 +961,16 @@
     font-size: 36px;
     position: relative; z-index: 1;
   }
-  .hbd-sparkles span { animation: none; }
+  .hbd-sparkles span { animation: hbdFloat 3s ease-in-out infinite; }
+  .hbd-sparkles span:nth-child(1) { animation-delay: 0s; }
+  .hbd-sparkles span:nth-child(2) { animation-delay: 0.5s; }
+  .hbd-sparkles span:nth-child(3) { animation-delay: 1s; }
+  .hbd-sparkles span:nth-child(4) { animation-delay: 1.5s; }
+  .hbd-sparkles span:nth-child(5) { animation-delay: 2s; }
+  @keyframes hbdFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.15); }
+  }
   .hbd-name {
     font-family: 'Dancing Script', cursive;
     font-size: clamp(28px, 5vw, 52px);
@@ -977,19 +982,24 @@
     position: absolute;
     font-size: 48px;
     pointer-events: none;
-    animation: none;
-    opacity: 0.62;
+    animation: balloonRise 6s ease-in-out infinite;
   }
-  .hbd-balloons.b1 { left: 5%; top: 18%; transform: rotate(-8deg); }
-  .hbd-balloons.b2 { right: 5%; top: 36%; transform: rotate(7deg); }
-  .hbd-balloons.b3 { left: 18%; bottom: 10%; transform: rotate(5deg); }
-  .hbd-balloons.b4 { right: 18%; bottom: 12%; transform: rotate(-6deg); }
+  .hbd-balloons.b1 { left: 5%; bottom: -20px; animation-delay: 0s; }
+  .hbd-balloons.b2 { left: 92%; bottom: -20px; animation-delay: 1.5s; }
+  .hbd-balloons.b3 { left: 20%; bottom: -20px; animation-delay: 3s; }
+  .hbd-balloons.b4 { left: 78%; bottom: -20px; animation-delay: 4.5s; }
+  @keyframes balloonRise {
+    0% { transform: translateY(0) rotate(-5deg); opacity: 0; }
+    10% { opacity: 1; }
+    85% { opacity: 0.8; }
+    100% { transform: translateY(-120vh) rotate(8deg); opacity: 0; }
+  }
 
-  /* Decorative emojis never animate; only the journal page itself flips. */
+
+
+  /* Keep non-birthday decorative emojis static. */
   .hero-hearts, .hero-hearts span,
-  .closing-hearts, .closing-hearts span,
-  .hbd-sparkles, .hbd-sparkles span,
-  .hbd-balloons, .page-deco,
+  .page-deco,
   .gallery-placeholder .icon, .video-placeholder .play {
     animation: none !important;
     transition: none !important;
@@ -1128,20 +1138,100 @@
   </div>
 </section>
 
+<style id="hbd-force-style">
+  .hbd-section {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: clamp(72px, 10vw, 120px) 24px !important;
+    text-align: center !important;
+    background: linear-gradient(160deg, #fff5f7 0%, #fde8ec 50%, #fdf0f8 100%) !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+  .hbd-section::before {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background-image: radial-gradient(circle at 15% 50%, rgba(247,197,203,0.4) 0%, transparent 45%), radial-gradient(circle at 85% 30%, rgba(212,96,122,0.15) 0%, transparent 45%) !important;
+    pointer-events: none !important;
+  }
+  .hbd-label {
+    display: block !important;
+    text-align: center !important;
+    font-family: 'Dancing Script', cursive !important;
+    font-size: clamp(20px, 3vw, 30px) !important;
+    color: var(--rose) !important;
+    letter-spacing: 2px !important;
+    margin: 0 auto 22px !important;
+    position: relative !important;
+    z-index: 2 !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hbd-title {
+    display: block !important;
+    text-align: center !important;
+    font-family: 'Playfair Display', serif !important;
+    font-size: clamp(56px, 13vw, 120px) !important;
+    font-weight: 700 !important;
+    line-height: 1.05 !important;
+    color: var(--text) !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    z-index: 2 !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hbd-title em {
+    display: block !important;
+    font-style: italic !important;
+    color: var(--dusty) !important;
+  }
+  .hbd-sparkles {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 18px !important;
+    margin: 36px auto 0 !important;
+    font-size: clamp(30px, 6vw, 42px) !important;
+    position: relative !important;
+    z-index: 2 !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hbd-sparkles span { display: inline-block !important; }
+  .hbd-balloons {
+    position: absolute !important;
+    font-size: clamp(36px, 7vw, 56px) !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+  }
+  .hbd-balloons.b1 { left: 5% !important; top: 18% !important; }
+  .hbd-balloons.b2 { right: 5% !important; top: 32% !important; }
+  .hbd-balloons.b3 { left: 18% !important; bottom: 12% !important; }
+  .hbd-balloons.b4 { right: 18% !important; bottom: 12% !important; }
+  @media (max-width: 640px) {
+    .hbd-section { padding: 76px 16px !important; }
+    .hbd-sparkles { gap: 10px !important; }
+    .hbd-balloons { opacity: 0.55 !important; }
+  }
+</style>
 <!-- Happy Birthday -->
 <section class="hbd-section" aria-labelledby="hbd-title">
   <div class="hbd-balloons b1" aria-hidden="true">🎈</div>
   <div class="hbd-balloons b2" aria-hidden="true">🎀</div>
   <div class="hbd-balloons b3" aria-hidden="true">🎊</div>
   <div class="hbd-balloons b4" aria-hidden="true">🎈</div>
-  <p class="hbd-label reveal">wishing you the most magical day</p>
-  <h2 class="hbd-title reveal" id="hbd-title">
+  <p class="hbd-label">wishing you the most magical day</p>
+  <h2 class="hbd-title" id="hbd-title">
     Happy<br><em>Birthday!</em>
   </h2>
-  <div class="hbd-sparkles reveal" aria-hidden="true">
+  <div class="hbd-sparkles" aria-hidden="true">
     <span>🎂</span><span>🌸</span><span>✨</span><span>🌸</span><span>🎂</span>
   </div>
 </section>
+
 
 <!-- Closing -->
 <section class="closing" aria-labelledby="closing-quote">
@@ -1153,6 +1243,7 @@
     <span>🌷</span><span>💕</span><span>🌷</span>
   </div>
 </section>
+
 
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
@@ -1181,56 +1272,56 @@ const pages = [
   {
     emoji: "✨",
     title: "The Beginning",
-    body: "Replace this with the text from your journal page 2. This is where your story starts — fill it with the memory that means the most to you.",
+    body: "",
     theme: "petal",
     img: "materials/j2.jpg"
   },
   {
     emoji: "💫",
     title: "All the Little Things",
-    body: "Replace with your journal page 3 text. Every tiny detail, every inside joke, every quiet moment — it all belongs here.",
+    body: "",
     theme: "white",
     img: "materials/j3.jpg"
   },
   {
     emoji: "🌙",
     title: "Late Nights & Early Mornings",
-    body: "Replace with your journal page 4 text. Write about those moments when the world was quiet and it was just the two of you.",
+    body: "",
     theme: "warm",
     img: "materials/j4.jpg"
   },
   {
     emoji: "🌸",
     title: "Adventures Together",
-    body: "Replace with your journal page 5 text. All the places you've gone, the things you've discovered, the laughs along the way.",
+    body: "",
     theme: "sage",
     img: "materials/j5.jpg"
   },
   {
     emoji: "💝",
     title: "Why I Love You",
-    body: "Replace with your journal page 6 text. A list, a letter, a poem — whatever feels right for all the reasons you love them.",
+    body: "",
     theme: "petal",
     img: "materials/j6.jpg"
   },
   {
     emoji: "🎀",
     title: "Our Favourite Moments",
-    body: "Replace with your journal page 7 text. The moments you'd replay a thousand times if you could.",
+    body: "",
     theme: "white",
     img: "materials/j7.jpg"
   },
   {
     emoji: "🌷",
     title: "Here & Now",
-    body: "Replace with your journal page 8 text. What this birthday means, how far you've come, how grateful you are.",
+    body: "",
     theme: "warm",
     img: "materials/j8.jpg"
   },
   {
     emoji: "♡",
     title: "Forever & Always",
-    body: "Replace with your journal page 9 text. End with the words that feel like home — and of course, your special line.",
+    body: "",
     theme: "sage",
     img: "materials/j9.jpg",
     signature: true
@@ -1310,35 +1401,16 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
   }
 
   function renderCover() {
-    const p = pages[0];
-    const image = p.img ? `<img class="journal-image" src="${p.img}" alt="Journal cover memory" loading="lazy">` : '';
-    return `
-      <div class="page-content cover-page" style="background: linear-gradient(145deg,#fde8ec,#f9ede8);">
-        <div style="font-size:52px;position:relative;z-index:1;margin-bottom:12px;">${p.emoji}</div>
-        <div class="cover-title">${p.title}</div>
-        <div class="divider"></div>
-        ${image}
-        <div class="cover-sub">${p.subtitle}</div>
-        <div class="cover-date">${p.date}</div>
-        <div style="position:absolute;bottom:18px;right:18px;font-size:11px;color:var(--muted);opacity:0.5;font-style:italic;">open to read →</div>
-      </div>`;
+    return renderPage(0);
   }
 
   function renderPage(idx) {
-    if (idx >= pages.length) return `<div class="page-content"><p style="color:var(--muted);font-size:13px;">♡</p></div>`;
+    if (idx >= pages.length) return `<div class="page-content journal-photo-page"></div>`;
     const p = pages[idx];
-    if (p.isCover) return renderCover();
-    const sig = p.signature ? `<div class="journal-signature">I love you more<br>than mostest ♡</div>` : '';
-    const image = p.img ? `<img class="journal-image" src="${p.img}" alt="Journal memory ${idx}" loading="lazy">` : '';
+    const image = p.img ? `<img class="journal-image" src="${p.img}" alt="Journal page ${idx + 1}" loading="lazy">` : '';
     return `
-      <div class="${themeClass(p.theme)}">
-        <div class="page-deco">${p.emoji}</div>
-        <div class="page-heading">${p.title}</div>
-        <div class="divider"></div>
+      <div class="${themeClass(p.theme)} journal-photo-page">
         ${image}
-        <div class="page-body">${p.body}</div>
-        ${sig}
-        <div class="page-num">${idx}</div>
       </div>`;
   }
 
