@@ -1029,7 +1029,7 @@
 
 <!-- Hero -->
 <section class="hero" aria-labelledby="hero-title">
-  <div class="hero-label">Happy Birthday, my love</div>
+  <div class="hero-label">Happy One Month Anniversary, my love</div>
   <h1 class="hero-title" id="hero-title">
     I love you more<br><em>than mostest</em>
   </h1>
@@ -1217,7 +1217,7 @@
     .hbd-balloons { opacity: 0.55 !important; }
   }
 </style>
-<!-- Happy Birthday -->
+<!-- Happy One Month Anniversary -->
 <section class="hbd-section" aria-labelledby="hbd-title">
   <div class="hbd-balloons b1" aria-hidden="true">🎈</div>
   <div class="hbd-balloons b2" aria-hidden="true">🎀</div>
@@ -1225,7 +1225,7 @@
   <div class="hbd-balloons b4" aria-hidden="true">🎈</div>
   <p class="hbd-label">wishing you the most magical day</p>
   <h2 class="hbd-title" id="hbd-title">
-    Happy<br><em>Birthday!</em>
+    Happy One Month<br><em>Anniversary!</em>
   </h2>
   <div class="hbd-sparkles" aria-hidden="true">
     <span>🎂</span><span>🌸</span><span>✨</span><span>🌸</span><span>🎂</span>
@@ -1351,9 +1351,9 @@ const galleryItems = [
       - label: shown below the video
    ───────────────────────────────────────────────────────────── */
 const videoItems = [
-  { src: "materials/mp1.mp4", label: "Our little moment ♡" },
-  { src: "materials/mp2.mp4", label: "This one makes me smile" },
-  { src: "materials/mp3.mp4", label: "I watch this on repeat" },
+  { src: "materials/mp1.mp4" },
+  { src: "materials/mp2.mp4" },
+  { src: "materials/mp3.mp4" },
 ];
 </script>
 
@@ -1510,8 +1510,18 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     card.className = 'video-card';
     if (item.src) {
       card.innerHTML = `
-        <video src="${item.src}" autoplay muted loop playsinline preload="auto"></video>
-        <div class="video-label">${item.label}</div>`;
+        <video class="moving-video" src="${item.src}" autoplay muted loop playsinline webkit-playsinline preload="auto"></video>`;
+      const video = card.querySelector('video');
+      video.muted = true;
+      video.defaultMuted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.setAttribute('muted', '');
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+      video.addEventListener('loadedmetadata', () => {
+        video.play().catch(() => {});
+      }, { once: true });
     } else {
       card.innerHTML = `
         <div class="video-placeholder">
@@ -1519,10 +1529,24 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
           <div class="vtitle">${item.label}</div>
           <div style="font-size:11px;opacity:0.6;margin-top:6px;">set src in videoItems</div>
         </div>
-        <div class="video-label">${item.label}</div>`;
+        `;
     }
     grid.appendChild(card);
   });
+
+  const playMovingVideos = () => {
+    grid.querySelectorAll('video').forEach(video => {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
+      video.play().catch(() => {});
+    });
+  };
+  playMovingVideos();
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) playMovingVideos();
+  });
+  document.addEventListener('touchstart', playMovingVideos, { once: true, passive: true });
 })();
 
 /* ── GIFT LETTER ── */
