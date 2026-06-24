@@ -267,6 +267,18 @@
     z-index: 1;
   }
 
+  .journal-image {
+    width: min(100%, 290px);
+    height: 145px;
+    object-fit: cover;
+    border: 5px solid white;
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(58,32,48,0.14);
+    margin: 2px 0 12px;
+    position: relative;
+    z-index: 1;
+  }
+
   .page-img {
     width: 120px; height: 120px;
     border-radius: 50%;
@@ -407,31 +419,33 @@
   }
 
   .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 16px;
+    columns: 280px;
+    column-gap: 18px;
     padding: 0 24px;
-    max-width: 1100px;
+    max-width: 1120px;
     margin: 0 auto;
   }
 
   .gallery-item {
     position: relative;
-    border-radius: 16px;
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 18px;
+    break-inside: avoid;
+    border-radius: 18px;
     overflow: hidden;
-    aspect-ratio: 1;
-    background: var(--petal);
-    box-shadow: 0 4px 20px rgba(58,32,48,0.08);
+    background: rgba(255,255,255,0.72);
+    box-shadow: 0 8px 26px rgba(58,32,48,0.09);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
   }
   .gallery-item:hover {
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 12px 40px rgba(212,96,122,0.2);
+    transform: translateY(-6px);
+    box-shadow: 0 14px 42px rgba(212,96,122,0.2);
   }
   .gallery-item img {
-    width: 100%; height: 100%;
-    object-fit: cover;
+    width: 100%;
+    height: auto;
     display: block;
   }
   .gallery-item .overlay {
@@ -468,10 +482,7 @@
     line-height: 1.5;
     padding: 0 12px;
   }
-
-  /* Gallery tall items */
-  .gallery-item.tall { grid-row: span 2; aspect-ratio: unset; }
-  .gallery-item.wide { grid-column: span 2; aspect-ratio: 2/1; }
+  /* Uploaded photos keep their natural shape automatically. */
 
   /* ── VIDEO SECTION ── */
   .video-section {
@@ -491,17 +502,18 @@
 
   .video-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 20px;
-    max-width: 900px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+    align-items: start;
+    max-width: 960px;
     margin: 0 auto;
   }
 
   .video-card {
-    border-radius: 16px;
+    border-radius: 18px;
     overflow: hidden;
     background: white;
-    box-shadow: 0 4px 24px rgba(58,32,48,0.08);
+    box-shadow: 0 8px 28px rgba(58,32,48,0.09);
     transition: transform 0.25s, box-shadow 0.25s;
   }
   .video-card:hover {
@@ -510,12 +522,12 @@
   }
   .video-card video {
     width: 100%;
+    height: auto;
     display: block;
-    aspect-ratio: 9/16;
-    object-fit: cover;
+    background: #fff5f8;
   }
   .video-placeholder {
-    aspect-ratio: 9/16;
+    min-height: 280px;
     background: linear-gradient(135deg, var(--petal), var(--blush));
     display: flex;
     flex-direction: column;
@@ -538,55 +550,116 @@
     color: var(--dusty);
   }
 
-  /* ── LOVE LETTER CLOSING ── */
-  .closing {
-    background: linear-gradient(160deg, #fde8ec 0%, #fdf6f0 100%);
-    padding: 100px 24px;
-    text-align: center;
+  /* ── PLAYLIST ── */
+  .playlist-section {
+    padding: 90px 24px;
+    background: linear-gradient(155deg, #fdf6f0 0%, #fde8ec 55%, #eef3e8 100%);
     position: relative;
     overflow: hidden;
   }
-  .closing::before {
-    content: '♡';
+  .playlist-card {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 18px;
+    border: 1px solid rgba(212,96,122,0.2);
+    border-radius: 26px;
+    background: rgba(255,255,255,0.7);
+    box-shadow: 0 18px 50px rgba(58,32,48,0.12);
+    backdrop-filter: blur(12px);
+  }
+  .playlist-card iframe {
+    display: block;
+    width: 100%;
+    height: 352px;
+    border: 0;
+    border-radius: 18px;
+  }
+  /* ── GIFT LETTER ── */
+  .gift-section {
+    padding: 90px 24px;
+    text-align: center;
+    background: linear-gradient(180deg, #fff5f8 0%, #fdf6f0 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .gift-wrap { max-width: 780px; margin: 0 auto; position: relative; z-index: 1; }
+  .gift-button {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--dusty);
+    cursor: pointer;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 24px;
+  }
+  .gift-button:focus-visible { outline: 3px solid var(--rose); outline-offset: 8px; border-radius: 12px; }
+  .gift-box-icon {
+    font-size: clamp(64px, 12vw, 92px);
+    line-height: 1;
+    filter: drop-shadow(0 10px 15px rgba(212,96,122,0.18));
+  }
+  .letter-card {
+    width: min(100%, 720px);
+    margin: 32px auto 0;
+    padding: clamp(46px, 7vw, 64px) clamp(22px, 6vw, 58px) clamp(34px, 6vw, 52px);
+    text-align: left;
+    color: var(--text);
+    background:
+      radial-gradient(circle at top left, rgba(255, 224, 232, 0.9), transparent 34%),
+      radial-gradient(circle at bottom right, rgba(255, 238, 214, 0.9), transparent 34%),
+      #fffdf9;
+    border: 2px solid rgba(212,96,122,0.62);
+    outline: 8px solid rgba(247,197,203,0.34);
+    outline-offset: -14px;
+    border-radius: 28px;
+    box-shadow: 0 24px 70px rgba(58,32,48,0.16);
+    position: relative;
+    transform-origin: top center;
+    animation: letterPop 0.34s ease both;
+  }
+  .letter-card[hidden] { display: none; }
+  @keyframes letterPop {
+    from { opacity: 0; transform: translateY(-10px) scale(0.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .letter-card::before, .letter-card::after {
     position: absolute;
-    font-size: 400px;
-    color: rgba(212,96,122,0.05);
-    top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
+    font-size: 30px;
+    color: var(--rose);
     pointer-events: none;
   }
-  .closing-quote {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(28px, 6vw, 60px);
-    font-style: italic;
-    color: var(--text);
-    line-height: 1.3;
-    max-width: 800px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
+  .letter-card::before { content: '🌷'; top: 17px; left: 20px; }
+  .letter-card::after { content: '🌷'; right: 20px; bottom: 17px; transform: rotate(180deg); }
+  .letter-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(212,96,122,0.25);
+    border-radius: 50%;
+    background: rgba(255,255,255,0.86);
+    color: var(--dusty);
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 1;
+    display: inline-grid;
+    place-items: center;
+    box-shadow: 0 10px 24px rgba(58,32,48,0.12);
   }
-  .closing-quote em { color: var(--dusty); }
-  .closing-sig {
+  .letter-close:hover { transform: translateY(-1px); background: #fff5f8; }
+  .letter-close:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
+  .letter-greeting, .letter-signoff {
     font-family: 'Dancing Script', cursive;
-    font-size: clamp(20px, 4vw, 34px);
-    color: var(--rose);
-    margin-top: 32px;
-    position: relative;
-    z-index: 1;
+    font-size: clamp(25px, 5vw, 34px);
+    color: var(--dusty);
   }
-  .closing-hearts {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 24px;
-    font-size: 28px;
-    position: relative;
-    z-index: 1;
-  }
-  .closing-hearts span { animation: pulse 2s ease-in-out infinite; }
-  .closing-hearts span:nth-child(2) { animation-delay: 0.4s; }
-  .closing-hearts span:nth-child(3) { animation-delay: 0.8s; }
+  .letter-card p { margin: 0 0 18px; font-size: 15px; line-height: 1.85; }
+  .letter-card .letter-signoff { margin-top: 26px; margin-bottom: 0; line-height: 1.45; }
 
   /* ── LIGHTBOX ── */
   .lightbox {
@@ -696,20 +769,25 @@
     .hero { min-height: 100svh; padding: 84px 18px 72px; }
     .hero-hearts { margin-top: 22px; }
     .scroll-hint { bottom: 18px; }
-    .section, .video-section, .hbd-section, .closing { padding: 64px 16px; }
+    .section, .video-section, .playlist-section, .gift-section, .hbd-section, .closing { padding: 64px 16px; }
     .section-title { margin-bottom: 36px; }
     .book-container { width: min(390px, 88vw); }
     .page-content { padding: 22px 18px; }
     .page-deco { font-size: 30px; margin-bottom: 8px; }
     .page-heading { font-size: clamp(19px, 6vw, 25px); }
     .page-body { font-size: clamp(12px, 3.5vw, 14px); line-height: 1.55; }
+    .journal-image { height: 115px; margin-bottom: 9px; }
     .mag-controls { gap: 14px; }
     .mag-btn { width: 44px; height: 44px; }
-    .gallery-grid, .video-grid { grid-template-columns: 1fr; padding: 0 16px; }
-    .gallery-item.wide { grid-column: span 1; aspect-ratio: 1; }
-    .gallery-item.tall { grid-row: span 1; aspect-ratio: 1; }
+    .gallery-grid { columns: 1; padding: 0 16px; }
+    .video-grid { grid-template-columns: 1fr; padding: 0 16px; }
     .hbd-balloons { font-size: 34px; opacity: 0.55; }
     .hbd-sparkles { gap: 10px; font-size: 28px; }
+    .playlist-card { padding: 10px; border-radius: 20px; }
+    .playlist-card iframe { height: 352px; border-radius: 14px; }
+    .letter-card { margin-top: 26px; padding: 56px 20px 34px; border-radius: 22px; outline-width: 6px; }
+    .letter-card p { font-size: 14px; line-height: 1.72; }
+    .letter-close { top: 12px; right: 12px; width: 36px; height: 36px; font-size: 23px; }
   }
 
   @media (max-width: 380px) {
@@ -838,6 +916,8 @@
     <li><a href="#journal">Journal</a></li>
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#videos">Moments</a></li>
+    <li><a href="#playlist">Playlist</a></li>
+    <li><a href="#letter">Letter</a></li>
   </ul>
 </nav>
 
@@ -912,6 +992,46 @@
   </div>
 </section>
 
+<!-- Spotify Playlist -->
+<section id="playlist" class="playlist-section" aria-labelledby="playlist-title">
+  <p class="section-label reveal">songs that feel like us</p>
+  <h2 class="section-title reveal" id="playlist-title">Our little soundtrack</h2>
+  <div class="playlist-card reveal">
+    <iframe
+      src="https://open.spotify.com/embed/playlist/2pFTJMA3RRRobPKl18BeBn?utm_source=generator&theme=0"
+      title="Our Spotify playlist"
+      loading="lazy"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+  </div>
+</section>
+
+<!-- Gift Letter -->
+<section id="letter" class="gift-section" aria-labelledby="gift-title">
+  <div class="gift-wrap">
+    <p class="section-label reveal">one last little surprise</p>
+    <h2 class="section-title reveal" id="gift-title">A gift for you</h2>
+    <button class="gift-button reveal" id="giftButton" type="button" aria-expanded="false" aria-controls="giftLetter">
+      <span class="gift-box-icon" aria-hidden="true">🎁</span>
+      <span id="giftButtonText">click to open</span>
+    </button>
+
+    <article class="letter-card" id="giftLetter" hidden tabindex="-1">
+      <button class="letter-close" id="letterClose" type="button" aria-label="Close letter">×</button>
+      <p class="letter-greeting">Heyy babyyyy,</p>
+      <p>It is so weird that it’s been a month of us.</p>
+      <p>Like, technically, a month isn’t even that long of a time, but somehow looking back at camp feels so nostalgic. I don’t even really know how to explain it, but it kind of feels like I’ve known you for way longer than I actually have.</p>
+      <p>It’s only been a month, but it feels like so much happened.</p>
+      <p>Thank you for making me laugh, listening to all my crash-outs, tolerating every dramatic moment, and thank you for being someone I can talk to about literally anything. Somehow, in a very short amount of time, you’ve become my favorite person.</p>
+      <p>And honestly, if you had shown the Ronit and Kasturi from May that this happened, they would have been so shocked.</p>
+      <p>But I am glad that it did.</p>
+      <p>Happy one month, babyyyy</p>
+      <p class="letter-signoff">I love you more than mostestt<br><br>XOXO,<br>Kasturi</p>
+    </article>
+  </div>
+</section>
+
 <!-- Happy Birthday -->
 <section class="hbd-section" aria-labelledby="hbd-title">
   <div class="hbd-balloons b1" aria-hidden="true">🎈</div>
@@ -959,63 +1079,64 @@ const pages = [
     title: "Our Story",
     subtitle: "A little journal made with all the love in the world",
     date: "June 2025",
-    emoji: "🌸"
+    emoji: "🌸",
+    img: "materials/j1.jpg"
   },
   {
     emoji: "✨",
     title: "The Beginning",
     body: "Replace this with the text from your journal page 2. This is where your story starts — fill it with the memory that means the most to you.",
     theme: "petal",
-    img: "📸" // replace with: src="photo1.jpg" in an <img> tag
+    img: "materials/j2.jpg"
   },
   {
     emoji: "💫",
     title: "All the Little Things",
     body: "Replace with your journal page 3 text. Every tiny detail, every inside joke, every quiet moment — it all belongs here.",
     theme: "white",
-    img: "📸"
+    img: "materials/j3.jpg"
   },
   {
     emoji: "🌙",
     title: "Late Nights & Early Mornings",
     body: "Replace with your journal page 4 text. Write about those moments when the world was quiet and it was just the two of you.",
     theme: "warm",
-    img: "📸"
+    img: "materials/j4.jpg"
   },
   {
     emoji: "🌸",
     title: "Adventures Together",
     body: "Replace with your journal page 5 text. All the places you've gone, the things you've discovered, the laughs along the way.",
     theme: "sage",
-    img: "📸"
+    img: "materials/j5.jpg"
   },
   {
     emoji: "💝",
     title: "Why I Love You",
     body: "Replace with your journal page 6 text. A list, a letter, a poem — whatever feels right for all the reasons you love them.",
     theme: "petal",
-    img: "📸"
+    img: "materials/j6.jpg"
   },
   {
     emoji: "🎀",
     title: "Our Favourite Moments",
     body: "Replace with your journal page 7 text. The moments you'd replay a thousand times if you could.",
     theme: "white",
-    img: "📸"
+    img: "materials/j7.jpg"
   },
   {
     emoji: "🌷",
     title: "Here & Now",
     body: "Replace with your journal page 8 text. What this birthday means, how far you've come, how grateful you are.",
     theme: "warm",
-    img: "📸"
+    img: "materials/j8.jpg"
   },
   {
     emoji: "♡",
     title: "Forever & Always",
     body: "Replace with your journal page 9 text. End with the words that feel like home — and of course, your special line.",
     theme: "sage",
-    img: "📸",
+    img: "materials/j9.jpg",
     signature: true
   }
 ];
@@ -1027,18 +1148,14 @@ const pages = [
       - caption: hover text
    ───────────────────────────────────────────────────────────── */
 const galleryItems = [
-  { src: null, caption: "Add your photo", emoji: "📷", layout: "wide" },
-  { src: null, caption: "Add your photo", emoji: "🌸", layout: "tall" },
-  { src: null, caption: "Add your photo", emoji: "💕" },
-  { src: null, caption: "Add your photo", emoji: "✨" },
-  { src: null, caption: "Add your photo", emoji: "🌷", layout: "tall" },
-  { src: null, caption: "Add your photo", emoji: "🎀" },
-  { src: null, caption: "Add your photo", emoji: "💫" },
-  { src: null, caption: "Add your photo", emoji: "🌙" },
-  { src: null, caption: "Add your photo", emoji: "♡" },
-  { src: null, caption: "Add your photo", emoji: "🌸" },
-  { src: null, caption: "Add your photo", emoji: "💕", layout: "wide" },
-  { src: null, caption: "Add your photo", emoji: "✨" },
+  { src: "materials/s1.jpg", caption: "Snapshot 1", layout: "wide" },
+  { src: "materials/s2.jpg", caption: "Snapshot 2", layout: "tall" },
+  { src: "materials/s3.jpg", caption: "Snapshot 3" },
+  { src: "materials/s4.jpg", caption: "Snapshot 4" },
+  { src: "materials/s5.jpg", caption: "Snapshot 5", layout: "tall" },
+  { src: "materials/s6.jpg", caption: "Snapshot 6" },
+  { src: "materials/s7.jpg", caption: "Snapshot 7" },
+  { src: "materials/s8.jpg", caption: "Snapshot 8", layout: "wide" },
 ];
 
 /* ─────────────────────────────────────────────────────────────
@@ -1047,10 +1164,9 @@ const galleryItems = [
       - label: shown below the video
    ───────────────────────────────────────────────────────────── */
 const videoItems = [
-  { src: null, label: "Our little moment ♡", emoji: "🎬" },
-  { src: null, label: "This one makes me smile", emoji: "🎞️" },
-  { src: null, label: "I watch this on repeat", emoji: "💕" },
-  { src: null, label: "Us, always", emoji: "✨" },
+  { src: "materials/mp1.mp4", label: "Our little moment ♡" },
+  { src: "materials/mp2.mp4", label: "This one makes me smile" },
+  { src: "materials/mp3.mp4", label: "I watch this on repeat" },
 ];
 </script>
 
@@ -1099,11 +1215,13 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
   function renderCover() {
     const p = pages[0];
+    const image = p.img ? `<img class="journal-image" src="${p.img}" alt="Journal cover memory" loading="lazy">` : '';
     return `
       <div class="page-content cover-page" style="background: linear-gradient(145deg,#fde8ec,#f9ede8);">
         <div style="font-size:52px;position:relative;z-index:1;margin-bottom:12px;">${p.emoji}</div>
         <div class="cover-title">${p.title}</div>
         <div class="divider"></div>
+        ${image}
         <div class="cover-sub">${p.subtitle}</div>
         <div class="cover-date">${p.date}</div>
         <div style="position:absolute;bottom:18px;right:18px;font-size:11px;color:var(--muted);opacity:0.5;font-style:italic;">open to read →</div>
@@ -1115,11 +1233,13 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     const p = pages[idx];
     if (p.isCover) return renderCover();
     const sig = p.signature ? `<div style="font-family:'Dancing Script',cursive;font-size:17px;color:var(--rose);margin-top:16px;position:relative;z-index:1;">I love you more than mostest ♡</div>` : '';
+    const image = p.img ? `<img class="journal-image" src="${p.img}" alt="Journal memory ${idx}" loading="lazy">` : '';
     return `
       <div class="${themeClass(p.theme)}">
         <div class="page-deco">${p.emoji}</div>
         <div class="page-heading">${p.title}</div>
         <div class="divider"></div>
+        ${image}
         <div class="page-body">${p.body}</div>
         ${sig}
         <div class="page-num">${idx}</div>
@@ -1222,7 +1342,7 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     card.className = 'video-card';
     if (item.src) {
       card.innerHTML = `
-        <video src="${item.src}" loop muted playsinline autoplay></video>
+        <video src="${item.src}" controls playsinline preload="metadata"></video>
         <div class="video-label">${item.label}</div>`;
     } else {
       card.innerHTML = `
@@ -1237,6 +1357,28 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
   });
 })();
 
+/* ── GIFT LETTER ── */
+const giftButton = document.getElementById('giftButton');
+const giftLetter = document.getElementById('giftLetter');
+const giftButtonText = document.getElementById('giftButtonText');
+const letterClose = document.getElementById('letterClose');
+
+function openGiftLetter() {
+  giftLetter.hidden = false;
+  giftButton.setAttribute('aria-expanded', 'true');
+  giftButtonText.textContent = 'click to open';
+  giftLetter.focus();
+}
+
+function closeGiftLetter() {
+  giftLetter.hidden = true;
+  giftButton.setAttribute('aria-expanded', 'false');
+  giftButtonText.textContent = 'click to open';
+  giftButton.focus();
+}
+
+giftButton.addEventListener('click', openGiftLetter);
+letterClose.addEventListener('click', closeGiftLetter);
 /* ── LIGHTBOX ── */
 function openLightbox(src, alt) {
   const lb = document.getElementById('lightbox');
